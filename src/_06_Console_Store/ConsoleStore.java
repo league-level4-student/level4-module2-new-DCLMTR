@@ -1,5 +1,7 @@
 package _06_Console_Store;
 
+import java.util.Scanner;
+
 public class ConsoleStore {
 
     /*
@@ -37,7 +39,14 @@ public class ConsoleStore {
      */
 
     public static void main(String[] args) {
-
+    	String input = "";
+    	Scanner keyboard = new Scanner(System.in);
+    	boolean checkout = false;
+    	do {
+    		System.out.println("again?");
+    		input = keyboard.next();
+    		checkout = keyboard.next().equalsIgnoreCase("y") ? true : false;
+    	} while(checkout == false);
+    	keyboard.close();
     }
-
 }
