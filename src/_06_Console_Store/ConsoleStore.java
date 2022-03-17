@@ -2,6 +2,13 @@ package _06_Console_Store;
 
 import java.util.Scanner;
 
+import _02_Generics_Store.Candy;
+import _02_Generics_Store.Cart;
+import _02_Generics_Store.Clothing;
+import _02_Generics_Store.Food;
+import _02_Generics_Store.NonFood;
+import _02_Generics_Store.Toy;
+
 public class ConsoleStore {
 
     /*
@@ -37,16 +44,41 @@ public class ConsoleStore {
      * print out a receipt showing their name, the individual prices of the
      * items and their total.
      */
-
+	Cart<NonFood> cart = new Cart<NonFood>();
+	
+	
     public static void main(String[] args) {
+    	int balance = 20;
     	String input = "";
+    	ConsoleStore c = new ConsoleStore();
     	Scanner keyboard = new Scanner(System.in);
-    	boolean checkout = false;
     	do {
-    		System.out.println("again?");
+    		System.out.println("Your currently have $" + balance + " remaining. What would you like to do? (Add: A, Remove: R, Check Cart: C)"); 
     		input = keyboard.next();
-    		checkout = keyboard.next().equalsIgnoreCase("y") ? true : false;
-    	} while(checkout == false);
+    		if(input.equalsIgnoreCase("A")) {
+    			System.out.println("What would you like to buy? (Clothing: $5, Toy: $3)");
+    			c.addCart(keyboard.next());
+    		} else if(input.equalsIgnoreCase("R")) {
+    			
+    		} else if(input.equalsIgnoreCase("C")) {
+    			c.view();
+    		}
+    		System.out.println("Would you like to check out?");
+    	} while(!keyboard.next().equalsIgnoreCase("y"));
+    	System.out.println("Goodbye");
     	keyboard.close();
     }
+    
+    public void addCart(String input) {
+    	NonFood thing = input.equalsIgnoreCase("Clothing") ? new Clothing() : new Toy();
+    	cart.add(thing);
+    }
+    public void removeItem(String input) {
+    	
+    }
+    public void view() {
+    	cart.showCart();
+    	System.out.println("You currently have " + cart.length() + " items, for a total cost of " + cart.getCost() + ".");
+    }
+    
 }

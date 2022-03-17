@@ -30,6 +30,17 @@ public class Cart<T extends NonFood> {
         JOptionPane.showMessageDialog(null,
                 "Your cart is full!\nNo more than 5 items");
     }
+    public int getCost() {
+    	int cost = 0;
+    	for(int i = 0; i < cart.length; i++) {
+    		if(cart[i] == new Toy()) {
+    			cost+=3;
+    		} else if(cart[i] == new Clothing()) {
+    			cost+=5;
+    		}
+    	}
+    	return cost;
+    }
 
     // Displays everything currently in the cart
     public void showCart() {
