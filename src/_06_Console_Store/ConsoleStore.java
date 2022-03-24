@@ -86,7 +86,7 @@ public class ConsoleStore {
     		System.out.println("Your currently have $" + (balance - cart.getCost()) + " remaining. What would you like to do? (Add: A, Remove: R, Check Cart: C, Check Out: Y)"); 
     		input = keyboard.next();
     		if(input.equalsIgnoreCase("A")) {
-    			System.out.println("What would you like to buy? (Clothing: $5, Toy: $3)");
+    			System.out.println("What would you like to buy? (Chair: $10, Clothing: $5, Toy: $3, Toothbrush: $1)");
     			addCart(keyboard.next());
     		} else if(input.equalsIgnoreCase("R")) {
     			System.out.println("What item would you like to remove?");

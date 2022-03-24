@@ -10,7 +10,7 @@ import javax.swing.JPanel;
  * <T extends Food> means we can only create a Cart with objects part of the 
  * Food class
  */
-
+//Create new Toothbrush and Chair 
 @SuppressWarnings("unchecked")
 public class Cart<T extends NonFood> {
     private T[] cart;
@@ -23,7 +23,6 @@ public class Cart<T extends NonFood> {
         for (int i = 0; i < cart.length; i++) {
             if (cart[i] == null) {
                 cart[i] = item;
-                return;
             }
         }
         JOptionPane.showMessageDialog(null,
