@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 @SuppressWarnings("unchecked")
 public class Cart<T extends NonFood> {
     private T[] cart;
-
     public Cart() {
         cart = (T[]) new NonFood[5];
     }
@@ -30,16 +29,30 @@ public class Cart<T extends NonFood> {
         JOptionPane.showMessageDialog(null,
                 "Your cart is full!\nNo more than 5 items");
     }
-    public int getCost() {
-    	int cost = 0;
-    	for(int i = 0; i < cart.length; i++) {
-    		if(cart[i] == new Toy()) {
-    			cost+=3;
-    		} else if(cart[i] == new Clothing()) {
-    			cost+=5;
+    public void remove(String item) {
+    	for(int i = length()-1; i >= 0; i--) {
+    		if(cart[i].getClassType().equalsIgnoreCase(item)) {
+    			cart[i] = null;
+    			for(int j = i+1; j < cart.length; j++) {
+    				cart[j-1] = cart[j];
+    				cart[j] = null;
+    			}
+    			break;
     		}
     	}
+    }
+    public void clear() {
+    	cart = (T[]) new NonFood[5];
+    }
+    public int getCost() {
+    	int cost = 0;
+    	for(int i = 0; i < length(); i++) {
+    		cost+=cart[i].getItemCost();
+    	}
     	return cost;
+    }
+    public String getValue(int index) {
+    	return cart[index].getClassType() + ": $" + cart[index].getItemCost();
     }
 
     // Displays everything currently in the cart
@@ -60,6 +73,17 @@ public class Cart<T extends NonFood> {
     }
 
     public int length() {
-        return cart.length;
+    	int i = 0;
+    	while(i < cart.length && cart[i] != null) {
+    		i++;
+    	}
+        return i;
+    }
+    public String[] printList() {
+    	String[] array = new String[length()];
+    	for(int j = 0; j < length(); j++) {
+    		array[j] = cart[j].getClassType();
+    	}
+    	return array;
     }
 }

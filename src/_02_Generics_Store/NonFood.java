@@ -8,9 +8,11 @@ import javax.swing.JLabel;
 
 public abstract class NonFood {
 	String item;
-	
+	String classtype;
+	int cost;
 	public abstract JLabel getNonFood();
-		
+	public abstract String getClassType();
+	public abstract int getItemCost();
 	@SuppressWarnings("rawtypes")
 	public static ImageIcon loadImage(String fileName) {
 		try {

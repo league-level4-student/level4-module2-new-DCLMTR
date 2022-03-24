@@ -1,5 +1,6 @@
 package _06_Console_Store;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import _02_Generics_Store.Candy;
@@ -45,40 +46,66 @@ public class ConsoleStore {
      * items and their total.
      */
 	Cart<NonFood> cart = new Cart<NonFood>();
+	int balance = 20;
+	String input = "";
 	
+	Scanner keyboard = new Scanner(System.in);
 	
     public static void main(String[] args) {
-    	int balance = 20;
-    	String input = "";
     	ConsoleStore c = new ConsoleStore();
-    	Scanner keyboard = new Scanner(System.in);
     	do {
-    		System.out.println("Your currently have $" + balance + " remaining. What would you like to do? (Add: A, Remove: R, Check Cart: C)"); 
+    	c.store();
+    	}
+    	while(c.checkOut() == false);
+    	c.cart.showCart();
+    }
+    public boolean checkOut() {
+    	if(balance - cart.getCost() < 0) {
+    		System.out.println("You cannot afford the items in your cart, would you like to return them?");
+    		if(keyboard.next().equalsIgnoreCase("Y")) {
+    			cart.clear();
+    		} 
+    		return false;
+    	} else {
+    		printReceipt();
+    		keyboard.close();
+    		return true;
+    	}
+    	
+    }
+    public void printReceipt() {
+    	System.out.println("Thank you for shopping!");
+    	System.out.println("Items:");
+    	for(int i = 0; i < cart.length(); i++) {
+    		System.out.println(cart.getValue(i));
+    	}
+    	System.out.println("Total Cost: $" + cart.getCost() + "\nBalance Remaining: $" + (balance - cart.getCost()));
+    }
+    public void store() {
+    	do {
+    		System.out.println("Your currently have $" + (balance - cart.getCost()) + " remaining. What would you like to do? (Add: A, Remove: R, Check Cart: C, Check Out: Y)"); 
     		input = keyboard.next();
     		if(input.equalsIgnoreCase("A")) {
     			System.out.println("What would you like to buy? (Clothing: $5, Toy: $3)");
-    			c.addCart(keyboard.next());
+    			addCart(keyboard.next());
     		} else if(input.equalsIgnoreCase("R")) {
-    			
+    			System.out.println("What item would you like to remove?");
+    			removeItem(keyboard.next());
     		} else if(input.equalsIgnoreCase("C")) {
-    			c.view();
+    			view();
     		}
-    		System.out.println("Would you like to check out?");
-    	} while(!keyboard.next().equalsIgnoreCase("y"));
-    	System.out.println("Goodbye");
-    	keyboard.close();
+    	} while(!input.equalsIgnoreCase("Y"));
     }
-    
     public void addCart(String input) {
     	NonFood thing = input.equalsIgnoreCase("Clothing") ? new Clothing() : new Toy();
     	cart.add(thing);
     }
     public void removeItem(String input) {
-    	
+    	cart.remove(input);
     }
     public void view() {
-    	cart.showCart();
-    	System.out.println("You currently have " + cart.length() + " items, for a total cost of " + cart.getCost() + ".");
+    	System.out.println("You currently have " + cart.length() + " items, for a total cost of $" + cart.getCost() + ".\nItems:");
+    	System.out.println(Arrays.deepToString(cart.printList()));
     }
     
 }
