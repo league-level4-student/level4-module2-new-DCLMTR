@@ -23,6 +23,7 @@ public class Cart<T extends NonFood> {
         for (int i = 0; i < cart.length; i++) {
             if (cart[i] == null) {
                 cart[i] = item;
+                return;
             }
         }
         JOptionPane.showMessageDialog(null,

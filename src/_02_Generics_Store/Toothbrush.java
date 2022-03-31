@@ -9,10 +9,10 @@ public class Toothbrush extends NonFood {
 		this.classtype = "Toothbrush";
 		this.cost = 1;
 		if(new Random().nextBoolean()) {
-			this.item = "toy1.jpeg";
+			this.item = "toothbrush1.jpeg";
 		}
 		else {
-			this.item = "toy2.jpeg";
+			this.item = "toothbrush2.jpeg";
 		}
 	}
 

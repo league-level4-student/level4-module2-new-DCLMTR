@@ -9,10 +9,10 @@ public class Chair extends NonFood {
 		this.classtype = "Chair";
 		this.cost = 10;
 		if(new Random().nextBoolean()) {
-			this.item = "toy1.jpeg";
+			this.item = "chair1.jpeg";
 		}
 		else {
-			this.item = "toy2.jpeg";
+			this.item = "chair2.jpeg";
 		}
 	}
 

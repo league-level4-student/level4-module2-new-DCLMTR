@@ -5,9 +5,11 @@ import java.util.Scanner;
 
 import _02_Generics_Store.Candy;
 import _02_Generics_Store.Cart;
+import _02_Generics_Store.Chair;
 import _02_Generics_Store.Clothing;
 import _02_Generics_Store.Food;
 import _02_Generics_Store.NonFood;
+import _02_Generics_Store.Toothbrush;
 import _02_Generics_Store.Toy;
 
 public class ConsoleStore {
@@ -97,7 +99,7 @@ public class ConsoleStore {
     	} while(!input.equalsIgnoreCase("Y"));
     }
     public void addCart(String input) {
-    	NonFood thing = input.equalsIgnoreCase("Clothing") ? new Clothing() : new Toy();
+    	NonFood thing = input.equalsIgnoreCase("Clothing") ? new Clothing() : input.equalsIgnoreCase("Toy") ? new Toy() : input.equalsIgnoreCase("Chair") ? new Chair() : new Toothbrush();
     	cart.add(thing);
     }
     public void removeItem(String input) {
